@@ -2,6 +2,7 @@ package org.example;
 
 import java.util.Scanner;
 
+
 public class Expenses {
     private String description;
     private double amount;
@@ -12,17 +13,31 @@ public class Expenses {
     }
 
     // Getter methods...
+    public String getDescription() {
+        return description;
+    }
 
-    public static Expenses createExpenseFromInput() {
+    public double getAmount() {
+        return amount;
+    }
+    public static Expenses createExpensesFromInput() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Enter expense description: ");
         String description = scanner.nextLine();
 
-        System.out.print("Enter expense amount: ");
-        double amount = scanner.nextDouble();
-        scanner.nextLine(); // Consume the newline character
-
+        double amount;
+        while (true) {
+            try {
+                System.out.print("Enter expense amount: ");
+                amount = scanner.nextDouble();
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid amount. Please enter a numeric value.");
+                scanner.nextLine();
+            }
+        }
+        scanner.nextLine();
         return new Expenses(description, amount);
     }
 }
