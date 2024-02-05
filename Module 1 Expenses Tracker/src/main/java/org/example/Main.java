@@ -42,13 +42,20 @@ public class Main {
                         break;
                     case 3:
                         if (currentUser != null) {
-                            System.out.println("Expenses:");
+                            System.out.println("________________________________________________");
+                            System.out.println(currentUser.getName() + " Account Information");
+                            System.out.println("Purchase History:");
+                            System.out.println(" ");
                             for (Expenses expense : currentUser.getExpenses()) {
                                 System.out.println("Description: " + expense.getDescription() + ", Amount: " + expense.getAmount());
                             }
                             DecimalFormat decimalFormat = new DecimalFormat("#.##");
-                            System.out.println("Total Savings: $" + decimalFormat.format(currentUser.getBalance()));
-                            System.out.println(" ");
+                            System.out.println("Balance");
+
+                            System.out.println("Total in your Savings: $" + decimalFormat.format(currentUser.getBalance()));
+                            System.out.println("________________________________________________");
+
+
                         } else {
                             System.out.println("Please create an account first.");
                         }
