@@ -1,21 +1,21 @@
-function httpGetAsync(url, callback) {
-    const xmlHttp = new XMLHttpRequest();
-    xmlHttp.onreadystatechange = function() {
-        if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
-            callback(xmlHttp.responseText);
-        }
+function convertCurrency() {
+        
+    const amount = document.getElementById('amount').value;
+
+
+    const fromCurrency = document.getElementById('fromCurrency').value;
+    const toCurrency = document.getElementById('toCurrency').value;
+
+   
+    const exchangeRates = {
+        'USD': { 'EUR': 0.93, 'USD': 1 },
+        'EUR': { 'USD': 1.08, 'EUR': 1 }
+        // Add more currency rates as needed
     };
-    xmlHttp.open("GET", url, true); // true for asynchronous
-    xmlHttp.send(null);
+
+    // Calculate the converted amount
+    const convertedAmount = amount * exchangeRates[fromCurrency][toCurrency];
+
+    // Display the result
+    document.getElementById('result').innerHTML = `Converted Amount: ${convertedAmount.toFixed(2)} ${toCurrency}`;
 }
-
-const url = "https://exchange-rates.abstractapi.com/v1/live/?api_key=6e2c4cc0ca704f15a5e67a41b3c09d97&base=USD&target=EUR";
-
-// Define a callback function to handle the response
-function handleApiResponse(response) {
-    // Process the response as needed
-    console.log(response);
-}
-
-// Make the API request
-httpGetAsync(url, handleApiResponse);
