@@ -4,32 +4,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
   taskForm.addEventListener('submit', (e: Event) => {
       e.preventDefault();
-      addTask();
+      addNote();
   });
 
-  function addTask() {
-      const newTaskInput = document.getElementById('new-task') as HTMLInputElement;
-      const taskText = newTaskInput.value.trim();
+  function addNote() {
+      const newNoteInput = document.getElementById('new-task') as HTMLInputElement;
+      const noteText = newNoteInput.value.trim();
 
-      if (taskText !== '') {
+      if (noteText !== '') {
           const listItem = document.createElement('li');
           listItem.innerHTML = `
-              <span>${taskText}</span>
-              <button onclick="removeTask(this)">Remove</button>
+              <span>${noteText}</span>
+              <button class="remove-btn">Remove</button>
           `;
           taskList.appendChild(listItem);
-          newTaskInput.value = '';
+          newNoteInput.value = '';
+
+          const removeButton = listItem.querySelector('.remove-btn') as HTMLButtonElement;
+          removeButton.addEventListener('click', () => removeNote(listItem));
       }
   }
 
-  (window as any).removeTask = (button: HTMLButtonElement) => {
-    const listItem = button.parentElement;
-
-    if (listItem) {
-        const taskList = listItem.parentElement;
-        if (taskList) {
-            taskList.removeChild(listItem);
-        }
-    }
-  };
+  function removeNote(listItem: HTMLLIElement) {
+      taskList.removeChild(listItem);
+  }
 });
